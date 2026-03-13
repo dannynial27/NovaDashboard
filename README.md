@@ -54,4 +54,3 @@ NovaDashboard/
 *To be added once deployed to GitHub Pages.*
 
 ---
-*Created as a portfolio showcase project.*
