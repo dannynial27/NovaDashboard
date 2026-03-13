@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova | NextGen Finance</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="dark-theme">
+    
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass-panel">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon"><i class="fa-brands fa-space-awesome"></i></span>
+                    <h2>Nova.</h2>
+                </div>
+                <button class="menu-toggle" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-links">
+                    <li class="nav-item active">
+                        <a href="#"><i class="fa-solid fa-grid-2"></i> <span>Dashboard</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#"><i class="fa-solid fa-chart-pie"></i> <span>Portfolio</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i> <span>Transactions</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#"><i class="fa-solid fa-wallet"></i> <span>Wallets</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#"><i class="fa-solid fa-chart-line"></i> <span>Analytics</span></a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a href="#"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span></a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header glass-panel">
+                <div class="search-bar">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search assets, transactions...">
+                </div>
+                
+                <div class="user-actions">
+                    <button class="action-btn notifications active-ping"><i class="fa-regular fa-bell"></i></button>
+                    <button class="action-btn messages"><i class="fa-regular fa-comment-dots"></i></button>
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="User Avatar" class="avatar">
+                        <div class="user-info">
+                            <span class="user-name">Alex Carter</span>
+                            <span class="user-role">Premium Member</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down chevron"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-grid">
+                
+                <!-- Overview Cards -->
+                <div class="overview-section">
+                    <h3 class="section-title">Overview</h3>
+                    <div class="cards-grid">
+                        <div class="stat-card glass-panel gradient-border">
+                            <div class="card-header">
+                                <span class="card-title">Total Balance</span>
+                                <div class="icon-box primary"><i class="fa-solid fa-wallet"></i></div>
+                            </div>
+                            <h2 class="card-value">$124,562.00</h2>
+                            <div class="card-trend positive">
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+                                <span>+14.5% ($15,700)</span>
+                                <span class="trend-period">vs last month</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card glass-panel">
+                            <div class="card-header">
+                                <span class="card-title">Total Profit</span>
+                                <div class="icon-box success"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                            </div>
+                            <h2 class="card-value">$32,104.50</h2>
+                            <div class="card-trend positive">
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+                                <span>+8.2%</span>
+                                <span class="trend-period">vs last month</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card glass-panel">
+                            <div class="card-header">
+                                <span class="card-title">Total Expenses</span>
+                                <div class="icon-box danger"><i class="fa-solid fa-credit-card"></i></div>
+                            </div>
+                            <h2 class="card-value">$8,430.25</h2>
+                            <div class="card-trend negative">
+                                <i class="fa-solid fa-arrow-trend-down"></i>
+                                <span>-2.4%</span>
+                                <span class="trend-period">vs last month</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Chart Area -->
+                <div class="chart-section glass-panel">
+                    <div class="section-header">
+                        <h3 class="section-title">Portfolio Performance</h3>
+                        <div class="chart-filters">
+                            <button class="filter-btn">1H</button>
+                            <button class="filter-btn">1D</button>
+                            <button class="filter-btn active">1W</button>
+                            <button class="filter-btn">1M</button>
+                            <button class="filter-btn">1Y</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="portfolioChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Right Side Panes (Assets & Recent Transactions) -->
+                <aside class="right-panes">
+                    <!-- My Assets -->
+                    <div class="assets-pane glass-panel">
+                        <div class="section-header">
+                            <h3 class="section-title">Top Assets</h3>
+                            <a href="#" class="view-all">View All</a>
+                        </div>
+                        <ul class="asset-list">
+                            <li class="asset-item">
+                                <div class="asset-info">
+                                    <div class="asset-icon btc"><i class="fa-brands fa-bitcoin"></i></div>
+                                    <div class="asset-details">
+                                        <span class="asset-name">Bitcoin</span>
+                                        <span class="asset-symbol">BTC</span>
+                                    </div>
+                                </div>
+                                <div class="asset-stats">
+                                    <span class="asset-price">$64,230.12</span>
+                                    <span class="asset-change positive">+2.4%</span>
+                                </div>
+                            </li>
+                            <li class="asset-item">
+                                <div class="asset-info">
+                                    <div class="asset-icon eth"><i class="fa-brands fa-ethereum"></i></div>
+                                    <div class="asset-details">
+                                        <span class="asset-name">Ethereum</span>
+                                        <span class="asset-symbol">ETH</span>
+                                    </div>
+                                </div>
+                                <div class="asset-stats">
+                                    <span class="asset-price">$3,450.80</span>
+                                    <span class="asset-change positive">+5.1%</span>
+                                </div>
+                            </li>
+                            <li class="asset-item">
+                                <div class="asset-info">
+                                    <div class="asset-icon aapl"><i class="fa-brands fa-apple"></i></div>
+                                    <div class="asset-details">
+                                        <span class="asset-name">Apple Inc.</span>
+                                        <span class="asset-symbol">AAPL</span>
+                                    </div>
+                                </div>
+                                <div class="asset-stats">
+                                    <span class="asset-price">$185.30</span>
+                                    <span class="asset-change negative">-0.5%</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Quick Transfer -->
+                    <div class="transfer-pane glass-panel glow-effect">
+                        <h3 class="section-title">Quick Transfer</h3>
+                        <div class="transfer-form">
+                            <div class="input-group">
+                                <label>Amount</label>
+                                <div class="amount-input">
+                                    <span class="currency">$</span>
+                                    <input type="number" placeholder="0.00" value="1500">
+                                </div>
+                            </div>
+                            <div class="users-list">
+                                <img src="https://i.pravatar.cc/150?img=32" alt="User" class="transfer-avatar active">
+                                <img src="https://i.pravatar.cc/150?img=12" alt="User" class="transfer-avatar">
+                                <img src="https://i.pravatar.cc/150?img=5" alt="User" class="transfer-avatar">
+                                <button class="add-user-btn"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                            <button class="primary-btn w-100">Send Money <i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Recent Transactions Full Width Table -->
+                <div class="transactions-section glass-panel">
+                    <div class="section-header">
+                        <h3 class="section-title">Recent Transactions</h3>
+                        <button class="secondary-btn"><i class="fa-solid fa-download"></i> Export</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="transactions-table">
+                            <thead>
+                                <tr>
+                                    <th>Transaction ID</th>
+                                    <th>Date</th>
+                                    <th>Recipient</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#TRX-9482</td>
+                                    <td>Oct 24, 2023 14:30</td>
+                                    <td><div class="tbl-user"><img src="https://i.pravatar.cc/150?img=47" alt=""> Sarah Connor</div></td>
+                                    <td>Transfer</td>
+                                    <td class="negative">-$500.00</td>
+                                    <td><span class="badge completed">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#TRX-9481</td>
+                                    <td>Oct 23, 2023 09:15</td>
+                                    <td><div class="tbl-user"><div class="icon-circle netflix"><i class="fa-solid fa-play"></i></div> Netflix</div></td>
+                                    <td>Subscription</td>
+                                    <td class="negative">-$15.99</td>
+                                    <td><span class="badge completed">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#TRX-9480</td>
+                                    <td>Oct 21, 2023 11:20</td>
+                                    <td><div class="tbl-user"><img src="https://i.pravatar.cc/150?img=60" alt=""> TechCorp Inc.</div></td>
+                                    <td>Salary</td>
+                                    <td class="positive">+$8,500.00</td>
+                                    <td><span class="badge completed">Completed</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#TRX-9479</td>
+                                    <td>Oct 20, 2023 16:45</td>
+                                    <td><div class="tbl-user"><div class="icon-circle binance"><i class="fa-brands fa-btc"></i></div> Binance Deposit</div></td>
+                                    <td>Investment</td>
+                                    <td class="negative">-$2,000.00</td>
+                                    <td><span class="badge pending">Pending</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom App JS -->
+    <script src="js/app.js"></script>
+</body>
+</html>
