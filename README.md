@@ -51,6 +51,6 @@ NovaDashboard/
 
 ## 🌐 Live Demo
 
-*To be added once deployed to GitHub Pages.*
+**[View the Live Dashboard on GitHub Pages](https://dannynial27.github.io/NovaDashboard/)**
 
 ---
