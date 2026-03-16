@@ -30,19 +30,19 @@
             <nav class="sidebar-nav">
                 <ul class="nav-links">
                     <li class="nav-item active">
-                        <a href="#"><i class="fa-solid fa-grid-2"></i> <span>Dashboard</span></a>
+                        <a href="#" data-view="dashboard"><i class="fa-solid fa-grid-2"></i> <span>Dashboard</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"><i class="fa-solid fa-chart-pie"></i> <span>Portfolio</span></a>
+                        <a href="#" data-view="portfolio"><i class="fa-solid fa-chart-pie"></i> <span>Portfolio</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"><i class="fa-solid fa-arrow-right-arrow-left"></i> <span>Transactions</span></a>
+                        <a href="#" data-view="transactions"><i class="fa-solid fa-arrow-right-arrow-left"></i> <span>Transactions</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"><i class="fa-solid fa-wallet"></i> <span>Wallets</span></a>
+                        <a href="#" data-view="wallets"><i class="fa-solid fa-wallet"></i> <span>Wallets</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"><i class="fa-solid fa-chart-line"></i> <span>Analytics</span></a>
+                        <a href="#" data-view="analytics"><i class="fa-solid fa-chart-line"></i> <span>Analytics</span></a>
                     </li>
                 </ul>
             </nav>
@@ -50,10 +50,10 @@
             <div class="sidebar-footer">
                 <ul class="nav-links">
                     <li class="nav-item">
-                        <a href="#"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
+                        <a href="#" data-view="settings"><i class="fa-solid fa-gear"></i> <span>Settings</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span></a>
+                        <a href="#" class="logout-btn" id="sidebar-logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> <span>Logout</span></a>
                     </li>
                 </ul>
             </div>
@@ -69,215 +69,743 @@
                 </div>
                 
                 <div class="user-actions">
-                    <button class="action-btn notifications active-ping"><i class="fa-regular fa-bell"></i></button>
-                    <button class="action-btn messages"><i class="fa-regular fa-comment-dots"></i></button>
-                    <div class="user-profile">
-                        <img src="https://i.pravatar.cc/150?img=11" alt="User Avatar" class="avatar">
-                        <div class="user-info">
-                            <span class="user-name">Alex Carter</span>
-                            <span class="user-role">Premium Member</span>
+                    <div class="dropdown-wrapper">
+                        <button class="action-btn notifications active-ping" id="notif-btn"><i class="fa-regular fa-bell"></i></button>
+                        <div class="dropdown-menu glass-panel" id="notif-menu">
+                            <div class="dropdown-header">
+                                <h4>Notifications</h4>
+                                <span class="mark-read">Mark all as read</span>
+                            </div>
+                            <div class="dropdown-content">
+                                <div class="notif-item unread">
+                                    <div class="notif-icon success"><i class="fa-solid fa-arrow-down"></i></div>
+                                    <div class="notif-text">
+                                        <p>Received <strong>$500.00</strong> from Sarah Connor</p>
+                                        <span>2 mins ago</span>
+                                    </div>
+                                </div>
+                                <div class="notif-item unread">
+                                    <div class="notif-icon warning"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                    <div class="notif-text">
+                                        <p>Unusual login attempt detected</p>
+                                        <span>1 hour ago</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <i class="fa-solid fa-chevron-down chevron"></i>
+                    </div>
+                    
+                    <button class="action-btn messages"><i class="fa-regular fa-comment-dots"></i></button>
+                    
+                    <div class="dropdown-wrapper">
+                        <div class="user-profile" id="profile-btn">
+                            <img src="https://i.pravatar.cc/150?img=11" alt="User Avatar" class="avatar">
+                            <div class="user-info">
+                                <span class="user-name">Alex Carter</span>
+                                <span class="user-role">Premium Member</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down chevron"></i>
+                        </div>
+                        <div class="dropdown-menu profile-menu glass-panel" id="profile-menu">
+                            <a href="#" class="dropdown-item" data-view="settings"><i class="fa-regular fa-user"></i> My Profile</a>
+                            <a href="#" class="dropdown-item" data-view="settings"><i class="fa-solid fa-gear"></i> Account Settings</a>
+                            <a href="#" class="dropdown-item"><i class="fa-regular fa-life-ring"></i> Support</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item text-danger" id="dropdown-logout-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                        </div>
                     </div>
                 </div>
             </header>
 
-            <!-- Dashboard Content -->
-            <div class="dashboard-grid">
-                
-                <!-- Overview Cards -->
-                <div class="overview-section">
-                    <h3 class="section-title">Overview</h3>
-                    <div class="cards-grid">
-                        <div class="stat-card glass-panel gradient-border">
-                            <div class="card-header">
-                                <span class="card-title">Total Balance</span>
-                                <div class="icon-box primary"><i class="fa-solid fa-wallet"></i></div>
-                            </div>
-                            <h2 class="card-value">$124,562.00</h2>
-                            <div class="card-trend positive">
-                                <i class="fa-solid fa-arrow-trend-up"></i>
-                                <span>+14.5% ($15,700)</span>
-                                <span class="trend-period">vs last month</span>
-                            </div>
-                        </div>
+            <!-- View Container -->
+            <div id="views-container">
+            
+                <!-- Dashboard View -->
+                <div id="dashboard-view" class="view-section active">
+                    <div class="dashboard-grid">
                         
-                        <div class="stat-card glass-panel">
-                            <div class="card-header">
-                                <span class="card-title">Total Profit</span>
-                                <div class="icon-box success"><i class="fa-solid fa-money-bill-trend-up"></i></div>
-                            </div>
-                            <h2 class="card-value">$32,104.50</h2>
-                            <div class="card-trend positive">
-                                <i class="fa-solid fa-arrow-trend-up"></i>
-                                <span>+8.2%</span>
-                                <span class="trend-period">vs last month</span>
+                        <!-- Overview Cards -->
+                        <div class="overview-section">
+                            <h3 class="section-title">Overview</h3>
+                            <div class="cards-grid">
+                                <div class="stat-card glass-panel gradient-border">
+                                    <div class="card-header">
+                                        <span class="card-title">Total Balance</span>
+                                        <div class="icon-box primary"><i class="fa-solid fa-wallet"></i></div>
+                                    </div>
+                                    <h2 class="card-value">$124,562.00</h2>
+                                    <div class="card-trend positive">
+                                        <i class="fa-solid fa-arrow-trend-up"></i>
+                                        <span>+14.5% ($15,700)</span>
+                                        <span class="trend-period">vs last month</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="stat-card glass-panel">
+                                    <div class="card-header">
+                                        <span class="card-title">Total Profit</span>
+                                        <div class="icon-box success"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                                    </div>
+                                    <h2 class="card-value">$32,104.50</h2>
+                                    <div class="card-trend positive">
+                                        <i class="fa-solid fa-arrow-trend-up"></i>
+                                        <span>+8.2%</span>
+                                        <span class="trend-period">vs last month</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card glass-panel">
+                                    <div class="card-header">
+                                        <span class="card-title">Total Expenses</span>
+                                        <div class="icon-box danger"><i class="fa-solid fa-credit-card"></i></div>
+                                    </div>
+                                    <h2 class="card-value">$8,430.25</h2>
+                                    <div class="card-trend negative">
+                                        <i class="fa-solid fa-arrow-trend-down"></i>
+                                        <span>-2.4%</span>
+                                        <span class="trend-period">vs last month</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="stat-card glass-panel">
-                            <div class="card-header">
-                                <span class="card-title">Total Expenses</span>
-                                <div class="icon-box danger"><i class="fa-solid fa-credit-card"></i></div>
+                        <!-- Main Chart Area -->
+                        <div class="chart-section glass-panel">
+                            <div class="section-header">
+                                <h3 class="section-title">Portfolio Performance</h3>
+                                <div class="chart-filters">
+                                    <button class="filter-btn">1H</button>
+                                    <button class="filter-btn">1D</button>
+                                    <button class="filter-btn active">1W</button>
+                                    <button class="filter-btn">1M</button>
+                                    <button class="filter-btn">1Y</button>
+                                </div>
                             </div>
-                            <h2 class="card-value">$8,430.25</h2>
-                            <div class="card-trend negative">
-                                <i class="fa-solid fa-arrow-trend-down"></i>
-                                <span>-2.4%</span>
-                                <span class="trend-period">vs last month</span>
+                            <div class="chart-container">
+                                <canvas id="portfolioChart"></canvas>
                             </div>
                         </div>
+
+                        <!-- Right Side Panes (Assets & Recent Transactions) -->
+                        <aside class="right-panes">
+                            <!-- My Assets -->
+                            <div class="assets-pane glass-panel">
+                                <div class="section-header">
+                                    <h3 class="section-title">Top Assets</h3>
+                                    <a href="#" class="view-all" data-view="portfolio">View All</a>
+                                </div>
+                                <ul class="asset-list">
+                                    <li class="asset-item">
+                                        <div class="asset-info">
+                                            <div class="asset-icon btc"><i class="fa-brands fa-bitcoin"></i></div>
+                                            <div class="asset-details">
+                                                <span class="asset-name">Bitcoin</span>
+                                                <span class="asset-symbol">BTC</span>
+                                            </div>
+                                        </div>
+                                        <div class="asset-stats">
+                                            <span class="asset-price">$64,230.12</span>
+                                            <span class="asset-change positive">+2.4%</span>
+                                        </div>
+                                    </li>
+                                    <li class="asset-item">
+                                        <div class="asset-info">
+                                            <div class="asset-icon eth"><i class="fa-brands fa-ethereum"></i></div>
+                                            <div class="asset-details">
+                                                <span class="asset-name">Ethereum</span>
+                                                <span class="asset-symbol">ETH</span>
+                                            </div>
+                                        </div>
+                                        <div class="asset-stats">
+                                            <span class="asset-price">$3,450.80</span>
+                                            <span class="asset-change positive">+5.1%</span>
+                                        </div>
+                                    </li>
+                                    <li class="asset-item">
+                                        <div class="asset-info">
+                                            <div class="asset-icon aapl"><i class="fa-brands fa-apple"></i></div>
+                                            <div class="asset-details">
+                                                <span class="asset-name">Apple Inc.</span>
+                                                <span class="asset-symbol">AAPL</span>
+                                            </div>
+                                        </div>
+                                        <div class="asset-stats">
+                                            <span class="asset-price">$185.30</span>
+                                            <span class="asset-change negative">-0.5%</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Quick Transfer -->
+                            <div class="transfer-pane glass-panel glow-effect">
+                                <h3 class="section-title">Quick Transfer</h3>
+                                <div class="transfer-form">
+                                    <div class="input-group">
+                                        <label>Amount</label>
+                                        <div class="amount-input">
+                                            <span class="currency">$</span>
+                                            <input type="number" placeholder="0.00" value="1500" id="transfer-amount">
+                                        </div>
+                                    </div>
+                                    <div class="users-list" id="quick-transfer-users">
+                                        <img src="https://i.pravatar.cc/150?img=32" alt="Sarah Connor" class="transfer-avatar active">
+                                        <img src="https://i.pravatar.cc/150?img=12" alt="John Doe" class="transfer-avatar">
+                                        <img src="https://i.pravatar.cc/150?img=5" alt="Alice Smith" class="transfer-avatar">
+                                        <button class="add-user-btn" id="add-recipient-btn"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                    <button class="primary-btn w-100" id="transfer-submit-btn">Send Money <i class="fa-solid fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </aside>
+
+                        <!-- Recent Transactions Full Width Table -->
+                        <div class="transactions-section glass-panel">
+                            <div class="section-header">
+                                <h3 class="section-title">Recent Transactions</h3>
+                                <button class="secondary-btn" id="export-csv-btn"><i class="fa-solid fa-download"></i> Export</button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="transactions-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Transaction ID</th>
+                                            <th>Date</th>
+                                            <th>Recipient</th>
+                                            <th>Type</th>
+                                            <th>Amount</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Populated via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Main Chart Area -->
-                <div class="chart-section glass-panel">
+                <!-- Portfolio View -->
+                <div id="portfolio-view" class="view-section">
                     <div class="section-header">
-                        <h3 class="section-title">Portfolio Performance</h3>
-                        <div class="chart-filters">
-                            <button class="filter-btn">1H</button>
-                            <button class="filter-btn">1D</button>
-                            <button class="filter-btn active">1W</button>
-                            <button class="filter-btn">1M</button>
-                            <button class="filter-btn">1Y</button>
-                        </div>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="portfolioChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Right Side Panes (Assets & Recent Transactions) -->
-                <aside class="right-panes">
-                    <!-- My Assets -->
-                    <div class="assets-pane glass-panel">
-                        <div class="section-header">
-                            <h3 class="section-title">Top Assets</h3>
-                            <a href="#" class="view-all">View All</a>
-                        </div>
-                        <ul class="asset-list">
-                            <li class="asset-item">
-                                <div class="asset-info">
-                                    <div class="asset-icon btc"><i class="fa-brands fa-bitcoin"></i></div>
-                                    <div class="asset-details">
-                                        <span class="asset-name">Bitcoin</span>
-                                        <span class="asset-symbol">BTC</span>
-                                    </div>
-                                </div>
-                                <div class="asset-stats">
-                                    <span class="asset-price">$64,230.12</span>
-                                    <span class="asset-change positive">+2.4%</span>
-                                </div>
-                            </li>
-                            <li class="asset-item">
-                                <div class="asset-info">
-                                    <div class="asset-icon eth"><i class="fa-brands fa-ethereum"></i></div>
-                                    <div class="asset-details">
-                                        <span class="asset-name">Ethereum</span>
-                                        <span class="asset-symbol">ETH</span>
-                                    </div>
-                                </div>
-                                <div class="asset-stats">
-                                    <span class="asset-price">$3,450.80</span>
-                                    <span class="asset-change positive">+5.1%</span>
-                                </div>
-                            </li>
-                            <li class="asset-item">
-                                <div class="asset-info">
-                                    <div class="asset-icon aapl"><i class="fa-brands fa-apple"></i></div>
-                                    <div class="asset-details">
-                                        <span class="asset-name">Apple Inc.</span>
-                                        <span class="asset-symbol">AAPL</span>
-                                    </div>
-                                </div>
-                                <div class="asset-stats">
-                                    <span class="asset-price">$185.30</span>
-                                    <span class="asset-change negative">-0.5%</span>
-                                </div>
-                            </li>
-                        </ul>
+                        <h3 class="section-title">My Portfolio</h3>
                     </div>
                     
-                    <!-- Quick Transfer -->
-                    <div class="transfer-pane glass-panel glow-effect">
-                        <h3 class="section-title">Quick Transfer</h3>
-                        <div class="transfer-form">
-                            <div class="input-group">
-                                <label>Amount</label>
-                                <div class="amount-input">
-                                    <span class="currency">$</span>
-                                    <input type="number" placeholder="0.00" value="1500">
+                    <div class="dashboard-grid" style="grid-template-areas: 'overview overview' 'table right';">
+                        
+                        <!-- Allocation Chart Pane -->
+                        <div class="glass-panel" style="grid-area: overview; padding: 24px; display: flex; gap: 40px; align-items: center;">
+                            <div style="flex: 1;">
+                                <h4>Asset Allocation</h4>
+                                <p class="text-muted" style="margin-bottom: 20px; font-size: 0.9rem;">Distribution of your investments across different asset classes.</p>
+                                <div style="height: 250px; width: 100%;">
+                                    <canvas id="allocationChart"></canvas>
                                 </div>
                             </div>
-                            <div class="users-list">
-                                <img src="https://i.pravatar.cc/150?img=32" alt="User" class="transfer-avatar active">
-                                <img src="https://i.pravatar.cc/150?img=12" alt="User" class="transfer-avatar">
-                                <img src="https://i.pravatar.cc/150?img=5" alt="User" class="transfer-avatar">
-                                <button class="add-user-btn"><i class="fa-solid fa-plus"></i></button>
+                            
+                            <div style="flex: 1; display: flex; flex-direction: column; gap: 15px;">
+                                <div class="stat-card glass-panel" style="padding: 15px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <div class="asset-icon btc" style="width: 30px; height: 30px; font-size: 0.9rem;"><i class="fa-brands fa-bitcoin"></i></div>
+                                            <span>Crypto</span>
+                                        </div>
+                                        <span class="positive">65%</span>
+                                    </div>
+                                    <h3 style="margin-top: 10px;">$80,965.30</h3>
+                                </div>
+                                <div class="stat-card glass-panel" style="padding: 15px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <div class="asset-icon aapl" style="width: 30px; height: 30px; font-size: 0.9rem;"><i class="fa-solid fa-chart-simple"></i></div>
+                                            <span>Stocks</span>
+                                        </div>
+                                        <span class="positive">25%</span>
+                                    </div>
+                                    <h3 style="margin-top: 10px;">$31,140.50</h3>
+                                </div>
+                                <div class="stat-card glass-panel" style="padding: 15px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 10px;">
+                                            <div class="icon-circle" style="background: rgba(0,206,201,0.15); color: var(--secondary); width: 30px; height: 30px; font-size: 0.9rem;"><i class="fa-solid fa-money-bill"></i></div>
+                                            <span>Cash / Fiat</span>
+                                        </div>
+                                        <span class="positive">10%</span>
+                                    </div>
+                                    <h3 style="margin-top: 10px;">$12,456.20</h3>
+                                </div>
                             </div>
-                            <button class="primary-btn w-100">Send Money <i class="fa-solid fa-paper-plane"></i></button>
+                        </div>
+
+                        <!-- All Assets Table -->
+                        <div class="glass-panel" style="grid-area: table; padding: 24px;">
+                            <h4 style="margin-bottom: 20px;">Asset Holdings</h4>
+                            <div class="table-responsive">
+                                <table class="transactions-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Asset</th>
+                                            <th>Amount</th>
+                                            <th>Current Price</th>
+                                            <th>Total Value</th>
+                                            <th>24h Change</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="asset-info">
+                                                    <div class="asset-icon btc"><i class="fa-brands fa-bitcoin"></i></div>
+                                                    <div class="asset-details">
+                                                        <span class="asset-name">Bitcoin</span>
+                                                        <span class="asset-symbol">BTC</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>1.052 BTC</td>
+                                            <td>$64,230.12</td>
+                                            <td><strong>$67,569.08</strong></td>
+                                            <td class="positive">+2.4%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="asset-info">
+                                                    <div class="asset-icon eth"><i class="fa-brands fa-ethereum"></i></div>
+                                                    <div class="asset-details">
+                                                        <span class="asset-name">Ethereum</span>
+                                                        <span class="asset-symbol">ETH</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>3.88 ETH</td>
+                                            <td>$3,450.80</td>
+                                            <td><strong>$13,389.10</strong></td>
+                                            <td class="positive">+5.1%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="asset-info">
+                                                    <div class="asset-icon aapl"><i class="fa-brands fa-apple"></i></div>
+                                                    <div class="asset-details">
+                                                        <span class="asset-name">Apple Inc.</span>
+                                                        <span class="asset-symbol">AAPL</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>168 Shares</td>
+                                            <td>$185.30</td>
+                                            <td><strong>$31,130.40</strong></td>
+                                            <td class="negative">-0.5%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Mini Trending Pane -->
+                        <aside style="grid-area: right;" class="glass-panel">
+                            <div style="padding: 24px;">
+                                <h4 style="margin-bottom: 20px;">Hot Assets 🔥</h4>
+                                <ul class="asset-list">
+                                    <li class="asset-item">
+                                        <div class="asset-info">
+                                            <div class="asset-icon" style="background: rgba(253, 121, 168, 0.15); color: var(--accent);"><i class="fa-solid fa-dog"></i></div>
+                                            <div class="asset-details">
+                                                <span class="asset-name">Dogecoin</span>
+                                                <span class="asset-symbol">DOGE</span>
+                                            </div>
+                                        </div>
+                                        <div class="asset-stats">
+                                            <span class="asset-price">$0.18</span>
+                                            <span class="asset-change positive" style="color: var(--accent);">+18.4%</span>
+                                        </div>
+                                    </li>
+                                    <li class="asset-item">
+                                        <div class="asset-info">
+                                            <div class="asset-icon btc"><i class="fa-solid fa-n"></i></div>
+                                            <div class="asset-details">
+                                                <span class="asset-name">NVIDIA</span>
+                                                <span class="asset-symbol">NVDA</span>
+                                            </div>
+                                        </div>
+                                        <div class="asset-stats">
+                                            <span class="asset-price">$880.50</span>
+                                            <span class="asset-change positive">+8.2%</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+
+                <!-- Transactions View -->
+                <div id="transactions-view" class="view-section">
+                    <div class="section-header">
+                        <h3 class="section-title">Full Transaction History</h3>
+                    </div>
+                    
+                    <div class="glass-panel" style="padding: 24px;">
+                        
+                        <!-- Advanced Filters -->
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 250px;">
+                                <div class="search-bar" style="width: 100%;"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Search everywhere..."></div>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <select class="standard-input" style="width: 140px; margin-top: 0; appearance: auto; cursor: pointer;">
+                                    <option value="all">All Types</option>
+                                    <option value="transfer">Transfers</option>
+                                    <option value="subscription">Subscriptions</option>
+                                    <option value="salary">Income</option>
+                                </select>
+                                <select class="standard-input" style="width: 140px; margin-top: 0; appearance: auto; cursor: pointer;">
+                                    <option value="all">All Status</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="failed">Failed</option>
+                                </select>
+                                <button class="secondary-btn"><i class="fa-regular fa-calendar"></i> Date Range</button>
+                            </div>
+                        </div>
+
+                        <!-- Larger Table -->
+                        <div class="table-responsive" style="min-height: 400px;">
+                            <table class="transactions-table">
+                                <thead>
+                                    <tr>
+                                        <th>Transaction ID</th>
+                                        <th>Date</th>
+                                        <th>Recipient/Source</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="full-transactions-tbody">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Pagination Mock -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--glass-border);">
+                            <span class="text-muted" style="font-size: 0.9rem;">Showing 1 - 10 of 124 transactions</span>
+                            <div style="display: flex; gap: 8px;">
+                                <button class="secondary-btn" disabled><i class="fa-solid fa-chevron-left"></i> Prev</button>
+                                <button class="secondary-btn active" style="background: var(--primary); color: white; border-color: var(--primary);">1</button>
+                                <button class="secondary-btn">2</button>
+                                <button class="secondary-btn">3</button>
+                                <span style="display: flex; align-items: center; padding: 0 10px; color: var(--text-muted);">...</span>
+                                <button class="secondary-btn">13</button>
+                                <button class="secondary-btn">Next <i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Wallets View -->
+                <div id="wallets-view" class="view-section">
+                    <div class="section-header">
+                        <h3 class="section-title">Connected Wallets & Accounts</h3>
+                        <button class="primary-btn"><i class="fa-solid fa-plus"></i> Connect New</button>
+                    </div>
+                    
+                    <div class="dashboard-grid" style="grid-template-areas: 'cards form'; grid-template-columns: 2fr 1fr;">
+                        
+                        <!-- Wallets Grid -->
+                        <div style="grid-area: cards; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; align-content: start;">
+                            <!-- Wallet Card 1 -->
+                            <div class="glass-panel" style="padding: 24px; border-top: 4px solid #f6851b;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <div class="icon-circle" style="background: rgba(246, 133, 27, 0.15); color: #f6851b;"><i class="fa-brands fa-ethereum"></i></div>
+                                        <div>
+                                            <h4 style="margin: 0;">MetaMask</h4>
+                                            <span class="text-muted" style="font-size: 0.8rem;">0x71C...9A3</span>
+                                        </div>
+                                    </div>
+                                    <span class="badge completed">Active</span>
+                                </div>
+                                <h2>$13,450.80</h2>
+                                <div style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--glass-border);">
+                                    <span class="text-muted" style="font-size: 0.9rem;">Ethereum Network</span>
+                                    <button class="secondary-btn" style="padding: 4px 10px; font-size: 0.8rem;">Copy Address</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Wallet Card 2 -->
+                            <div class="glass-panel" style="padding: 24px; border-top: 4px solid var(--accent);">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <div class="icon-circle" style="background: rgba(253, 121, 168, 0.15); color: var(--accent);"><i class="fa-solid fa-building-columns"></i></div>
+                                        <div>
+                                            <h4 style="margin: 0;">Chase Bank</h4>
+                                            <span class="text-muted" style="font-size: 0.8rem;">**** 4432</span>
+                                        </div>
+                                    </div>
+                                    <span class="badge completed">Active</span>
+                                </div>
+                                <h2>$8,125.00</h2>
+                                <div style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--glass-border);">
+                                    <span class="text-muted" style="font-size: 0.9rem;">Checking Account</span>
+                                    <button class="secondary-btn" style="padding: 4px 10px; font-size: 0.8rem;">Manage</button>
+                                </div>
+                            </div>
+
+                            <!-- Wallet Card 3 -->
+                            <div class="glass-panel" style="padding: 24px; border-top: 4px solid #f3ba2f;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <div class="icon-circle" style="background: rgba(243, 186, 47, 0.15); color: #f3ba2f;"><i class="fa-brands fa-btc"></i></div>
+                                        <div>
+                                            <h4 style="margin: 0;">Binance</h4>
+                                            <span class="text-muted" style="font-size: 0.8rem;">Exchange Account</span>
+                                        </div>
+                                    </div>
+                                    <span class="badge pending">Syncing</span>
+                                </div>
+                                <h2>$60,254.10</h2>
+                                <div style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--glass-border);">
+                                    <span class="text-muted" style="font-size: 0.9rem;">Last sync: 5m ago</span>
+                                    <button class="secondary-btn" style="padding: 4px 10px; font-size: 0.8rem;">Refresh</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Connect Form -->
+                        <div class="glass-panel" style="grid-area: form; padding: 24px; height: fit-content;">
+                            <h4 style="margin-bottom: 20px;">Connect New Wallet</h4>
+                            <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 20px;">Securely link a new crypto wallet, exchange, or bank account to track your balance.</p>
+                            
+                            <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem;">Connection Type</label>
+                            <select class="standard-input" style="margin-bottom: 15px; width: 100%;">
+                                <option>Web3 Wallet (MetaMask, Trust)</option>
+                                <option>Centralized Exchange (Binance, Coinbase)</option>
+                                <option>Bank Account (Plaid)</option>
+                            </select>
+
+                            <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem;">Wallet Address / API Key</label>
+                            <input type="text" class="standard-input" placeholder="0x..." style="margin-bottom: 20px;">
+
+                            <button class="primary-btn" style="width: 100%;">Connect Account <i class="fa-solid fa-link" style="margin-left: 8px;"></i></button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Analytics View -->
+                <div id="analytics-view" class="view-section">
+                    <div class="section-header">
+                        <h3 class="section-title">Spending & Income Analytics</h3>
+                    </div>
+                    
+                    <div class="dashboard-grid" style="grid-template-areas: 'chart chart categories' 'reports reports reports';">
+                        
+                        <!-- Main Bar Chart -->
+                        <div class="glass-panel" style="grid-area: chart; padding: 24px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                <h4>Cash Flow (6 Months)</h4>
+                                <select class="standard-input" style="width: 120px; padding: 6px 12px;">
+                                    <option>2023</option>
+                                    <option>2022</option>
+                                </select>
+                            </div>
+                            <div style="height: 300px; width: 100%;">
+                                <!-- Canvas for Bar Chart -->
+                                <canvas id="cashflowChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Top Categories List -->
+                        <div class="glass-panel" style="grid-area: categories; padding: 24px;">
+                            <h4 style="margin-bottom: 20px;">Top Spending Categories</h4>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 20px;">
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <span><i class="fa-solid fa-house" style="color: var(--primary); margin-right: 8px;"></i> Housing</span>
+                                        <strong>$2,450.00</strong>
+                                    </div>
+                                    <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 45%; height: 100%; background: var(--primary);"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <span><i class="fa-solid fa-utensils" style="color: var(--accent); margin-right: 8px;"></i> Food & Dining</span>
+                                        <strong>$850.20</strong>
+                                    </div>
+                                    <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 25%; height: 100%; background: var(--accent);"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <span><i class="fa-solid fa-plane" style="color: var(--secondary); margin-right: 8px;"></i> Travel</span>
+                                        <strong>$420.00</strong>
+                                    </div>
+                                    <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 15%; height: 100%; background: var(--secondary);"></div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <span><i class="fa-solid fa-film" style="color: #f3ba2f; margin-right: 8px;"></i> Entertainment</span>
+                                        <strong>$180.50</strong>
+                                    </div>
+                                    <div style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden;">
+                                        <div style="width: 8%; height: 100%; background: #f3ba2f;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Download Reports -->
+                        <div class="glass-panel" style="grid-area: reports; padding: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                            <div>
+                                <h4 style="margin-bottom: 5px;">Tax Reports & Statements</h4>
+                                <p class="text-muted" style="font-size: 0.9rem;">Generate consolidated statements for your connected accounts.</p>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="secondary-btn"><i class="fa-solid fa-file-pdf"></i> Generate PDF</button>
+                                <button class="secondary-btn"><i class="fa-solid fa-file-csv"></i> Download CSV</button>
+                            </div>
                         </div>
                     </div>
-                </aside>
+                </div>
 
-                <!-- Recent Transactions Full Width Table -->
-                <div class="transactions-section glass-panel">
+                <!-- Settings View -->
+                <div id="settings-view" class="view-section">
                     <div class="section-header">
-                        <h3 class="section-title">Recent Transactions</h3>
-                        <button class="secondary-btn"><i class="fa-solid fa-download"></i> Export</button>
+                        <h3 class="section-title">Account Settings</h3>
                     </div>
-                    <div class="table-responsive">
-                        <table class="transactions-table">
-                            <thead>
-                                <tr>
-                                    <th>Transaction ID</th>
-                                    <th>Date</th>
-                                    <th>Recipient</th>
-                                    <th>Type</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#TRX-9482</td>
-                                    <td>Oct 24, 2023 14:30</td>
-                                    <td><div class="tbl-user"><img src="https://i.pravatar.cc/150?img=47" alt=""> Sarah Connor</div></td>
-                                    <td>Transfer</td>
-                                    <td class="negative">-$500.00</td>
-                                    <td><span class="badge completed">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>#TRX-9481</td>
-                                    <td>Oct 23, 2023 09:15</td>
-                                    <td><div class="tbl-user"><div class="icon-circle netflix"><i class="fa-solid fa-play"></i></div> Netflix</div></td>
-                                    <td>Subscription</td>
-                                    <td class="negative">-$15.99</td>
-                                    <td><span class="badge completed">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>#TRX-9480</td>
-                                    <td>Oct 21, 2023 11:20</td>
-                                    <td><div class="tbl-user"><img src="https://i.pravatar.cc/150?img=60" alt=""> TechCorp Inc.</div></td>
-                                    <td>Salary</td>
-                                    <td class="positive">+$8,500.00</td>
-                                    <td><span class="badge completed">Completed</span></td>
-                                </tr>
-                                <tr>
-                                    <td>#TRX-9479</td>
-                                    <td>Oct 20, 2023 16:45</td>
-                                    <td><div class="tbl-user"><div class="icon-circle binance"><i class="fa-brands fa-btc"></i></div> Binance Deposit</div></td>
-                                    <td>Investment</td>
-                                    <td class="negative">-$2,000.00</td>
-                                    <td><span class="badge pending">Pending</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    
+                    <div class="dashboard-grid" style="grid-template-areas: 'profile preferences'; grid-template-columns: 1fr 1fr;">
+                        
+                        <!-- Profile Form -->
+                        <div class="glass-panel" style="grid-area: profile; padding: 30px;">
+                            <h4 style="margin-bottom: 24px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border);">Personal Information</h4>
+                            
+                            <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 30px;">
+                                <img src="https://i.pravatar.cc/150?img=32" alt="Profile" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary);">
+                                <div>
+                                    <button class="secondary-btn" style="margin-bottom: 8px;">Change Avatar</button>
+                                    <p class="text-muted" style="font-size: 0.8rem;">JPG, GIF or PNG. Max size 2MB</p>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem;">First Name</label>
+                                    <input type="text" class="standard-input" value="Sarah">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem;">Last Name</label>
+                                    <input type="text" class="standard-input" value="Connor">
+                                </div>
+                            </div>
+
+                            <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem;">Email Address</label>
+                            <input type="email" class="standard-input" value="sarah.connor@example.com" style="margin-bottom: 15px;">
+
+                            <label style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem;">Phone Number</label>
+                            <input type="tel" class="standard-input" value="+1 (555) 123-4567" style="margin-bottom: 30px;">
+
+                            <button class="primary-btn" onclick="showToast('Saved', 'Profile updated successfully.')">Save Changes</button>
+                        </div>
+
+                        <!-- Preferences & Security -->
+                        <div style="grid-area: preferences; display: flex; flex-direction: column; gap: 24px;">
+                            
+                            <!-- Preferences -->
+                            <div class="glass-panel" style="padding: 30px;">
+                                <h4 style="margin-bottom: 24px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border);">Preferences</h4>
+                                
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                    <div>
+                                        <strong>Email Notifications</strong>
+                                        <p class="text-muted" style="font-size: 0.8rem; margin-top: 4px;">Receive daily digest and alerts.</p>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <strong>Currency Display</strong>
+                                        <p class="text-muted" style="font-size: 0.8rem; margin-top: 4px;">Default fiat currency representation.</p>
+                                    </div>
+                                    <select class="standard-input" style="width: auto; padding: 6px 12px; margin-top: 0;">
+                                        <option>USD ($)</option>
+                                        <option>EUR (€)</option>
+                                        <option>GBP (£)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Security -->
+                            <div class="glass-panel" style="padding: 30px;">
+                                <h4 style="margin-bottom: 24px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border);">Security Settings</h4>
+                                
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                    <div>
+                                        <strong>Two-Factor Authentication (2FA)</strong>
+                                        <p class="text-muted" style="font-size: 0.8rem; margin-top: 4px;">Secure with Authenticator app.</p>
+                                    </div>
+                                    <button class="secondary-btn">Enable</button>
+                                </div>
+
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <strong>Change Password</strong>
+                                        <p class="text-muted" style="font-size: 0.8rem; margin-top: 4px;">Update login credentials.</p>
+                                    </div>
+                                    <button class="secondary-btn">Update</button>
+                                </div>
+                            </div>
+                            
+                            <button class="secondary-btn" style="color: var(--danger); border-color: rgba(255,118,117,0.3); align-self: flex-start;" onclick="showToast('Danger', 'Account deletion requested.', 'error')"><i class="fa-solid fa-trash"></i> Delete Account</button>
+
+                        </div>
+
                     </div>
                 </div>
 
             </div>
         </main>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Modal Container -->
+    <div class="modal-overlay" id="add-recipient-modal">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h3>Add New Recipient</h3>
+                <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>Recipient Name</label>
+                    <input type="text" id="new-recipient-name" class="standard-input" placeholder="e.g. John Wick">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn modal-cancel">Cancel</button>
+                <button class="primary-btn" id="save-recipient-btn">Add Recipient</button>
+            </div>
+        </div>
     </div>
 
     <!-- Chart.js -->
